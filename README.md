@@ -34,6 +34,10 @@ get_subtitle_file_info(full_file_path, sublanguage, forced)
 * sublanguage = *required*
 * forced = *optional* (default=False)
 
+Returns dictionary:
+
+    { file_no : XXXXX, file_name: XXXX }
+
 ### Download subtitle:
 ```python
 download_subtitle(file_no, output_directory, output_filename, overwrite)
@@ -42,6 +46,6 @@ download_subtitle(file_no, output_directory, output_filename, overwrite)
 * output_directory = *optional* (default=same as video file)
 * output_filename = *optional* (default=same as video file)
 * overwrite = *optional* (default=False)
-    
+
 FileOperations module contains code for the hashing from the XML-RPC implementation by Alexandre González at:
 https://raw.githubusercontent.com/agonzalezro/python-opensubtitles
