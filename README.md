@@ -24,8 +24,9 @@ file_info = os.get_subtitle_file_info("/my/video/file.mkv", "en", True)
 os.download_subtitle(file_info['file_no'])
 ```
 
+##Breakdown of functions
 
-Search for a subtitle:
+###Search for a subtitle:
 ```python
 get_subtitle_file_info(full_file_path, sublanguage, forced)
 ```
@@ -33,7 +34,7 @@ get_subtitle_file_info(full_file_path, sublanguage, forced)
 * sublanguage = *required*
 * forced = *optional* (default=False)
 
-Download subtitle:
+###Download subtitle:
 ```python
 download_subtitle(file_no, output_directory, output_filename, overwrite)
 ```
