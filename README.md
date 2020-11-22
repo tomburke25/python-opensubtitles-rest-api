@@ -34,7 +34,7 @@ get_subtitle_file_info(full_file_path, sublanguage, forced)
 * sublanguage = *required*
 * forced = *optional* (default=False)
 
-###Download subtitle:
+### Download subtitle:
 ```python
 download_subtitle(file_no, output_directory, output_filename, overwrite)
 ```
