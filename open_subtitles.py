@@ -67,12 +67,14 @@ class OpenSubtitles(object):
         user_headers = {'api-key': self.apikey, 'authorization': self.login_token}
 
         try:
-            user_response = requests.get(user_url, headers=user_headers)
-            user_response.raise_for_status()
+            # dont cache remaining_downloads, as this changes every time
+            with requests_cache.disabled():
+                user_response = requests.get(user_url, headers=user_headers)
+                user_response.raise_for_status()
 
-            # standard accounts have a low limit. Upgrade to VIP if you want more. It's about 10EUR a year.
-            user_json_response = user_response.json()
-            self.user_downloads_remaining = user_json_response['data']['remaining_downloads']
+                # standard accounts have a low limit. Upgrade to VIP if you want more. It's about 10EUR a year.
+                user_json_response = user_response.json()
+                self.user_downloads_remaining = user_json_response['data']['remaining_downloads']
 
         except requests.exceptions.HTTPError as httperr:
             raise SystemExit(
