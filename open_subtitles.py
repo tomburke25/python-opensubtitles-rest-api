@@ -154,7 +154,7 @@ class OpenSubtitles(object):
         # dont download if subtitle already exists
         if os.path.exists(download_directory + os.path.sep + download_filename) and not overwrite:
             print("Subtitle file " + download_directory + os.path.sep + download_filename + " already exists")
-            sys.exit(0)
+            return None
 
         # only download if user has download credits remaining
         if self.user_downloads_remaining > 0:
@@ -169,7 +169,12 @@ class OpenSubtitles(object):
 
                 # download the file
                 download_remote_file = requests.get(download_link)
-                open(download_directory + os.path.sep + download_filename, 'wb').write(download_remote_file.content)
+                try:
+                    open(download_directory + os.path.sep + download_filename, 'wb').write(download_remote_file.content)
+                    print("Saved subtitle to " + download_directory + os.path.sep + download_filename)
+                except IOError:
+                    print("Failed to save subtitle to " + download_directory + os.path.sep + download_filename)
+
 
             except requests.exceptions.HTTPError as httperr:
                 raise SystemExit(httperr)  # need more documentation to know exactly what the API HTTP error responses are
