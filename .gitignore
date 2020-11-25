@@ -1,3 +1,4 @@
 .*
 opensubtitle_cache.sqlite
+main.py
 !.gitignore

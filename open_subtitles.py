@@ -119,14 +119,18 @@ class OpenSubtitles(object):
             query_file_no = query_json_response['data'][0]['attributes']['files'][0]['file_id']
             query_file_name = query_json_response['data'][0]['attributes']['files'][0]['file_name']
 
+            return {'file_no': query_file_no, 'file_name': query_file_name}
+
         except requests.exceptions.HTTPError as httperr:
             raise SystemExit(httperr)  # need more documentation to know exactly what the API HTTP error responses are
         except requests.exceptions.RequestException as reqerr:
             raise SystemExit("Failed to login: " + reqerr)
         except ValueError as e:
             raise SystemExit("Failed to parse search_subtitle JSON response: " + e)
+        except IndexError as inerr:
+            print("No subtitle found at OpenSubtitles for " + self.file_name)
 
-        return {'file_no': query_file_no, 'file_name': query_file_name}
+
 
     # download a single subtitle file using the file_no
     def download_subtitle(self, file_no, output_directory=None, output_filename=None, overwrite=False):
